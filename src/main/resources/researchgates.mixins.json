@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.researchgates.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["CraftingMenuMixin", "StonecutterMenuMixin", "SmithingMenuMixin", "FurnaceMixin"],
+  "injectors": {"defaultRequire": 1}
+}

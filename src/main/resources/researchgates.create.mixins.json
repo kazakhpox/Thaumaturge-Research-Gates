@@ -1,0 +1,9 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "net.researchgates.createmixin",
+  "plugin": "net.researchgates.compat.CreateMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["DeployerMixin", "MechanicalCrafterMixin", "RecipeGridHandlerMixin"],
+  "injectors": {"defaultRequire": 1}
+}
