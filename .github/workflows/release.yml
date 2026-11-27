@@ -1,6 +1,6 @@
 name: Release
 
-# Builds the mod (Thauma-Geared) and publishes a GitHub release with the jar: on a pushed tag such as v0.1.0, or when run by hand
+# Builds the mod (Thaumaturge Research Gates) and publishes a GitHub release with the jar: on a pushed tag such as v0.1.0, or when run by hand
 # (Actions > Release > Run workflow), which makes the tag v<mod_version> from gradle.properties itself.
 on:
   push:
