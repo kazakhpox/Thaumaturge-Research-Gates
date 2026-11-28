@@ -42,6 +42,9 @@ public final class RecipeCheck {
                 + net.neoforged.fml.ModList.get().isLoaded("create"));
         var server = level.getServer();
         System.out.println(P + "data packs on: " + server.getPackRepository().getSelectedIds());
+        System.out.println(P + "mechanoturgy available: " + server.getPackRepository().getAvailableIds().contains("mod/researchgates:datapacks/mechanoturgy")
+                + ", on: " + server.getPackRepository().getSelectedIds().contains("mod/researchgates:datapacks/mechanoturgy")
+                + ", auto_enable: " + net.researchgates.GateConfig.AUTO_MECHANOTURGY.get());
         System.out.println(P + "mechanoturgy: " + ResearchGates.gates().stream().filter(g -> g.id.getNamespace().equals("createthaumaresearch")).count()
                 + " gates, " + server.getResourceManager().listResources("thaumaturge/research_entry",
                         id -> id.getNamespace().equals("createthaumaresearch")).size() + " research entries, "

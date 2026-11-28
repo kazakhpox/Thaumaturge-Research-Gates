@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -49,13 +50,17 @@ public final class ResearchGatesMod {
 
     /**
      * The built-in Mechanoturgy datapack ({@code datapacks/mechanoturgy}), offered only when Create is installed: a Thaumonomicon
-     * chapter whose research opens Create's machines, and the gates that lock them. Built-in, so it is switched on by itself in
-     * new worlds and in worlds that never had it; it shows in the world's data pack list and can be switched off there or with
-     * {@code /datapack disable}.
+     * chapter whose research opens Create's machines, and the gates that lock them. While the config's
+     * {@code mechanoturgy.auto_enable} is on, it is switched on by itself in new worlds and in worlds that never had it; either
+     * way it shows in the world's data pack list and can be switched on or off there or with {@code /datapack}.
      */
     private static void addMechanoturgy(AddPackFindersEvent event) {
+        // A built-in pack is switched on by itself where a world has no say on it yet; with auto_enable off it is only offered.
+        PackSource source = GateConfig.AUTO_MECHANOTURGY.get() ? PackSource.BUILT_IN
+                : PackSource.create(name -> Component.translatable("pack.nameAndSource", name,
+                        Component.translatable("pack.source.builtin")).withStyle(ChatFormatting.GRAY), false);
         event.addPackFinders(ResourceLocation.fromNamespaceAndPath(MOD_ID, "datapacks/mechanoturgy"), PackType.SERVER_DATA,
-                Component.translatable("pack.researchgates.mechanoturgy"), PackSource.BUILT_IN, false, Pack.Position.TOP);
+                Component.translatable("pack.researchgates.mechanoturgy"), source, false, Pack.Position.TOP);
     }
 
     /** A research's name as the Thaumonomicon shows it. */

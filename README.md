@@ -36,11 +36,14 @@ A recipe matching any of the lists is locked. A recipe under several gates needs
 
 With Create installed, the library brings a datapack of its own, **Mechanoturgy**. It adds a Thaumonomicon chapter of 21 research entries, from the first look at a waterwheel to trains, and 20 gates that lock Create's recipes behind them. For example, a shaft needs the Kinetics research.
 
-The datapack switches itself on in new worlds and in old worlds that never had it. It appears in the world's data pack list as "Mechanoturgy", and you can switch it off there or with a command:
+The datapack switches itself on in new worlds and in old worlds that never had it. To stop that, set `mechanoturgy.auto_enable = false` in the config. Either way it appears in the world's data pack list as "Mechanoturgy", and you can switch it on or off there or with a command:
 
 ```
+/datapack enable "mod/researchgates:datapacks/mechanoturgy"
 /datapack disable "mod/researchgates:datapacks/mechanoturgy"
 ```
+
+A world remembers its choice: the config only decides for worlds that have not met the datapack yet.
 
 To change a gate or a research entry, put your own datapack above it with a file at the same path: `data/createthaumaresearch/research_gates/<name>.json` or `data/createthaumaresearch/thaumaturge/research_entry/<name>.json`. The ids are the same as in the Create: Thauma Research mod, which this datapack replaces, so research already done keeps counting. Remove that mod: it would add its own copy of the chapter, and its machine pollution, which the datapack does not have.
 
@@ -64,7 +67,8 @@ Machines remember who placed them. While the owner is away, the answer from when
 `config/researchgates-common.toml`:
 - `lock_unowned_machines` (default `false`);
 - `gate_furnaces` (default `true`);
-- `tooltips` (default `true`).
+- `tooltips` (default `true`);
+- `mechanoturgy.auto_enable` (default `true`): whether the Mechanoturgy datapack switches itself on (see above).
 
 ## For other mods
 
