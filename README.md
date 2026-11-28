@@ -32,6 +32,18 @@ A gate is a JSON file in a datapack at `data/<namespace>/research_gates/<name>.j
 
 A recipe matching any of the lists is locked. A recipe under several gates needs all of them. Gates reload with `/reload`.
 
+## Built-in datapack: Mechanoturgy
+
+With Create installed, the library brings a datapack of its own, **Mechanoturgy**. It adds a Thaumonomicon chapter of 21 research entries, from the first look at a waterwheel to trains, and 20 gates that lock Create's recipes behind them. For example, a shaft needs the Kinetics research.
+
+The datapack switches itself on in new worlds and in old worlds that never had it. It appears in the world's data pack list as "Mechanoturgy", and you can switch it off there or with a command:
+
+```
+/datapack disable "mod/researchgates:datapacks/mechanoturgy"
+```
+
+To change a gate or a research entry, put your own datapack above it with a file at the same path: `data/createthaumaresearch/research_gates/<name>.json` or `data/createthaumaresearch/thaumaturge/research_entry/<name>.json`. The ids are the same as in the Create: Thauma Research mod, which this datapack replaces, so research already done keeps counting. Remove that mod: it would add its own copy of the chapter, and its machine pollution, which the datapack does not have.
+
 ## Where gates apply
 
 | Where | Whose research | What happens |

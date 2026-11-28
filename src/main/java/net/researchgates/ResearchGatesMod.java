@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -14,6 +17,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
@@ -38,8 +42,20 @@ public final class ResearchGatesMod {
         Owners.register(modBus);
         if (ModList.get().isLoaded("create")) {
             net.researchgates.compat.CreateCompat.register();
+            modBus.addListener(AddPackFindersEvent.class, ResearchGatesMod::addMechanoturgy);
         }
         NeoForge.EVENT_BUS.addListener(ItemTooltipEvent.class, ResearchGatesMod::onTooltip);
+    }
+
+    /**
+     * The built-in Mechanoturgy datapack ({@code datapacks/mechanoturgy}), offered only when Create is installed: a Thaumonomicon
+     * chapter whose research opens Create's machines, and the gates that lock them. Built-in, so it is switched on by itself in
+     * new worlds and in worlds that never had it; it shows in the world's data pack list and can be switched off there or with
+     * {@code /datapack disable}.
+     */
+    private static void addMechanoturgy(AddPackFindersEvent event) {
+        event.addPackFinders(ResourceLocation.fromNamespaceAndPath(MOD_ID, "datapacks/mechanoturgy"), PackType.SERVER_DATA,
+                Component.translatable("pack.researchgates.mechanoturgy"), PackSource.BUILT_IN, false, Pack.Position.TOP);
     }
 
     /** A research's name as the Thaumonomicon shows it. */

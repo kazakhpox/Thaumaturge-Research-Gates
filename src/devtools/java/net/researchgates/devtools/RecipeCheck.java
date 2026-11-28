@@ -40,6 +40,16 @@ public final class RecipeCheck {
     private static void start(ServerLevel level) {
         System.out.println(P + "gates loaded: " + ResearchGates.gates().size() + ", create loaded: "
                 + net.neoforged.fml.ModList.get().isLoaded("create"));
+        var server = level.getServer();
+        System.out.println(P + "data packs on: " + server.getPackRepository().getSelectedIds());
+        System.out.println(P + "mechanoturgy: " + ResearchGates.gates().stream().filter(g -> g.id.getNamespace().equals("createthaumaresearch")).count()
+                + " gates, " + server.getResourceManager().listResources("thaumaturge/research_entry",
+                        id -> id.getNamespace().equals("createthaumaresearch")).size() + " research entries, "
+                + server.getResourceManager().listResources("thaumaturge/research_category",
+                        id -> id.getNamespace().equals("createthaumaresearch")).size() + " category");
+        var shaft = server.getRecipeManager().byKey(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create", "crafting/kinetics/shaft"));
+        System.out.println(P + "create:crafting/kinetics/shaft gated by: " + shaft.map(h -> ResearchGates.gatesFor(h, h.value().getResultItem(server.registryAccess()))
+                .stream().map(g -> g.id.toString()).toList()).orElse(null));
         var player = FakePlayerFactory.getMinecraft(level);
         craft(level, player, Items.OAK_PLANKS, new int[]{1, 4, 5, 7, 8, 9}, "oak stairs (gated)");
         craft(level, player, Items.OAK_PLANKS, new int[]{7, 8, 9}, "oak slabs (gated, negate)");
