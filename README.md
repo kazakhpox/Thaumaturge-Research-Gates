@@ -1,5 +1,7 @@
 # Thaumaturge Research Gates
 
+<img src="docs/logo.png" alt="Research Gates logo: an arcane stone gate barred shut, a crafting grid behind it, locked with a golden research seal" width="128">
+
 A NeoForge 1.21.1 library that locks **any** recipe behind [Thaumaturge](https://modrinth.com/mod/thaumaturge) research.
 
 Thaumaturge only locks its own recipes: the arcane workbench, the crucible and infusion carry `"research": {"entry", "stage", "negate"}`. The crafting table, furnaces and stonecutter are not locked. This library locks them the same way. [RecipeStages](https://github.com/jaredlll08/RecipeStages) was the model, but here the stages are Thaumaturge research. The check is Thaumaturge's own (`ResearchGate.passes`), so `entry`, `stage` and `negate` mean what they mean in Thaumaturge's recipes.
